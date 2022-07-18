@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('poster');
-            $table->string('year');
+            $table->year('year');
             $table->string('trailer');
             $table->date('released');
             $table->string('runtime');

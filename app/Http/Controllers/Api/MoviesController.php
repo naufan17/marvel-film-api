@@ -13,7 +13,9 @@ class MoviesController extends Controller
 {
     public function index()
     {
-        $movies = Movie::select('title', 'poster', 'year')->get();
+        $movies = Movie::select('title', 'poster', 'year')
+                        ->orderBy('year', 'desc')
+                        ->get();
 
         return new MoviesResource(true, 'Data has been obtained', $movies);    
     }
