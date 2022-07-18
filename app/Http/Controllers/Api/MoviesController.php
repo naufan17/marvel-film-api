@@ -7,30 +7,23 @@ use App\Http\Resources\MoviesResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 
 class MoviesController extends Controller
 {
     public function index()
     {
-        $movies = Movie::select('title', 'posters', 'year')->get();
+        $movies = Movie::select('title', 'poster', 'year')->get();
 
-        return new MoviesResource(true, 'List data film', $movies);    
+        return new MoviesResource(true, 'Data has been obtained', $movies);    
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
-            'posters' => 'required|string',
-            'year' => 'required',
+            'year' => 'required|string',
             'trailer' => 'required|string',
-            'released' => 'required|date',
-            'runtime' => 'required|string',
-            'genre' => 'required|string',
-            'director' => 'required|string',
-            'writer' => 'required|string',
-            'actors' => 'required|string',
-            'plot' => 'required|string',
             'torrent' => 'required|string',
         ]);
 
@@ -38,25 +31,37 @@ class MoviesController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $response = Http::get('http://www.omdbapi.com', [
+            'apikey' => '7fd0d56',
+            't' => $request->title,
+            'y' => $request->year,
+        ]);
+
+        $data = json_decode($response);
+
         $movies = Movie::create([
-            'title' => $request->title,
-            'year' => $request->year,
-            'released' => $request->released,
-            'runtime' => $request->runtime,
-            'genre' => $request->genre,
-            'director' => $request->director,
-            'writer' => $request->writer,
-            'actors' => $request->actors,
-            'plot' => $request->plot,
-            'posters' => $request->posters,
+            'title' => $data->Title,
+            'poster' => $data->Poster,
+            'year' => $data->Year,
+            'trailer' => $request->trailer,
+            'released' => $data->Released,
+            'runtime' => $data->Runtime,
+            'genre' => $data->Genre,
+            'director' => $data->Director,
+            'writer' => $data->Writer,
+            'actors' => $data->Actors,
+            'plot' => $data->Plot,
             'torrent' => $request->torrent,
         ]);
 
-        return new MoviesResource(true, 'Data berhasil ditambahkan', $movies);   
+        return new MoviesResource(true, 'Data added successfully', $movies);   
     }
 
-    public function show(Movie $movie)
+    public function show($id)
     {
-        return new MoviesResource(true, 'List detail film', $movie);
+        $movies = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
+                        ->where('id', $id)->get();
+                        
+        return new MoviesResource(true, 'data was successfully obtained based on id', $movies);
     }
 }
