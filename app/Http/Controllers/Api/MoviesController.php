@@ -67,9 +67,9 @@ class MoviesController extends Controller
         return new MoviesResource(true, 'data was successfully obtained based on id', $movies);
     }
 
-    public function destroy(Movie $movies)
+    public function destroy($id)
     {
-        $movies->delete();
+        Movie::where('id', $id)->delete();
 
         return new MoviesResource(true, 'data successfully deleted', null);
     }
