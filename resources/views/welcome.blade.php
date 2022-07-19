@@ -51,8 +51,15 @@
                             Introduction
                             </h2>
                             <p class="text-base text-gray-400 sm:text-lg">
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. explicabo.
-                            </p>
+                            This application programming interface provides a collection of Marvel movies and series data. There are around 30+ data in the form of titles, posters, release years, trailers, release dates, durations, genres, directors, authors, actors, plots and download links via torrent.                            
+                            </p><br>
+                            <p class="text-base text-gray-400 sm:text-lg">
+                            These are open data for public. It doesn't need an API key to call these methods. You can call simple GET request or open it directly from the browser.
+                            </p><br>
+                            <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
+                                <li>The base endpoint is: https://marvel-film-api.herokuapp.com/</li>
+                                <li>All endpoints return either a JSON object or array.</li>
+                            </ul>
                         </div>
                         <div id="get_all">
                             <div class="max-w-3xl mb-10">
@@ -60,8 +67,11 @@
                                 #Get data movies
                                 </h2>
                                 <p class="text-base text-gray-400 sm:text-lg">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. explicabo.
+                                Get all data with the following request:
                                 </p>
+                                <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
+                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies</li>
+                                </ul>
                             </div>
                         </div>
                         <div id="get_by_id">
@@ -70,8 +80,11 @@
                                 #Get movies by id
                                 </h2>
                                 <p class="text-base text-gray-400 md:text-lg">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. explicabo.
+                                Get detailed data based on id with the following request:
                                 </p>
+                                <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
+                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies/{id}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
