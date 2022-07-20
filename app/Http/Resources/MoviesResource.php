@@ -32,10 +32,17 @@ class MoviesResource extends JsonResource
     public function toArray($request)
     {
         // return parent::toArray($request);
-        return[
-            'success' => $this->status,
-            'message' => $this->message,
-            'data' => $this->resource
-        ];
+        if($this->status === true){
+            return[
+                'success' => $this->status,
+                'message' => $this->message,
+                'data' => $this->resource
+            ];
+        }elseif($this->status === false){
+            return[
+                'success' => $this->status,
+                'message' => $this->message,
+            ];
+        }
     }
 }

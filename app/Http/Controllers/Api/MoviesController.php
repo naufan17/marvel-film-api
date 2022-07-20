@@ -17,7 +17,11 @@ class MoviesController extends Controller
                         ->orderBy('year', 'desc')
                         ->get();
 
-        return new MoviesResource(true, 'Data has been obtained', $movies);    
+        if($movies->isEmpty()){
+            return new MoviesResource(false, 'Data failed to get', null);
+        }else{
+            return new MoviesResource(true, 'Data has been obtained', $movies);    
+        }
     }
 
     public function store(Request $request)
@@ -56,21 +60,33 @@ class MoviesController extends Controller
             'torrent' => $request->torrent,
         ]);
 
-        return new MoviesResource(true, 'Data added successfully', $movies);   
+        if($movies->isEmpty()){
+            return new MoviesResource(false, 'Data failed to store', null);
+        }else{
+            return new MoviesResource(true, 'Data stored successfully', $movies);    
+        }
     }
 
-    public function show($id)
+    public function show($title)
     {
         $movies = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
-                        ->where('id', $id)->get();
+                        ->where('title', 'LIKE', '%'.$title.'%')->get();
                         
-        return new MoviesResource(true, 'data was successfully obtained based on id', $movies);
+        if($movies->isEmpty()){
+            return new MoviesResource(false, 'Data failed to get', null);
+        }else{
+            return new MoviesResource(true, 'Data has been obtained', $movies);    
+        }
     }
 
     public function destroy($id)
     {
-        Movie::where('id', $id)->delete();
+        $movies = Movie::where('id', $id)->delete();
 
-        return new MoviesResource(true, 'data successfully deleted', null);
+        if($movies->isEmpty()){
+            return new MoviesResource(false, 'Data failed to delete', null);
+        }else{
+            return new MoviesResource(true, 'Data deleted successfully', $movies);    
+        }
     }
 }
