@@ -4,13 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Documentation Marvel API</title>
-
-        <style src="{{ asset('css/app.css') }}" defer></style>
         
         <!-- Tailwind -->
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/jquery.js') }}" defer></script>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,19 +20,6 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
-        <script>
-            $(function() {
-                $("#show-get-all").click(function() {
-                    $("#content-get-all").toggle();
-                });
-            });
-            $(function() {
-                $("#show-search").click(function() {
-                    $("#content-search").toggle();
-                });
-            });
-        </script>
-
     </head>
     <body class="antialiased">
         <div class="relative bg-gray-800">
