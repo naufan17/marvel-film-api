@@ -33,9 +33,10 @@ class MoviesController extends Controller
             'torrent' => 'required|string',
         ]);
 
-        // if($validator->fails()) {
-        //     return response()->json($validator->errors(), 422);
-        // }
+        if($validator->fails()) {
+            // return response()->json($validator->errors(), 422);
+            return new MoviesResource(false, 'Data failed to store', null);
+        }
 
         $response = Http::get('http://www.omdbapi.com', [
             'apikey' => '7fd0d56',
@@ -77,7 +78,8 @@ class MoviesController extends Controller
         ]);
 
         if($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            // return response()->json($validator->errors(), 422);
+            return new MoviesResource(false, 'Data failed to store', null);
         }
 
         $movie->update([
