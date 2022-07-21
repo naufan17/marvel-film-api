@@ -92,7 +92,7 @@ class MoviesController extends Controller
 
     public function show($title)
     {
-        $title = ucfirst($title);
+        $title = ucwords($title);
         $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
                         ->where('title', 'LIKE', '%'.$title.'%')->get();
                         
