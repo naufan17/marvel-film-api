@@ -105,14 +105,14 @@ class MoviesController extends Controller
         }
     }
 
-    // public function destroy($id)
-    // {
-    //     $movie = Movie::where('id', $id)->delete();
+    public function destroy($id)
+    {
+        $movie = Movie::where('id', $id)->delete();
 
-    //     if($movie->isEmpty()){
-    //         return new MoviesResource(false, 'Data failed to delete', null);
-    //     }else{
-    //         return new MoviesResource(true, 'Data deleted successfully', $movie);    
-    //     }
-    // }
+        if($movie->isEmpty()){
+            return new MoviesResource(false, 'Data failed to delete', null);
+        }else{
+            return new MoviesResource(true, 'Data deleted successfully', $movie);    
+        }
+    }
 }
