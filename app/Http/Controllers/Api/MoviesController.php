@@ -109,10 +109,6 @@ class MoviesController extends Controller
     {
         $movie = Movie::where('id', $id)->delete();
 
-        if($movie->isEmpty()){
-            return new MoviesResource(false, 'Data failed to delete', null);
-        }else{
-            return new MoviesResource(true, 'Data deleted successfully', $movie);    
-        }
+        return new MoviesResource(true, 'Data deleted successfully', $movie);    
     }
 }
