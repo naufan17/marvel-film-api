@@ -61,11 +61,7 @@ class MoviesController extends Controller
             'torrent' => $request->torrent,
         ]);
 
-        if($movie->isEmpty()){
-            return new MoviesResource(false, 'Data failed to store', null);
-        }else{
-            return new MoviesResource(true, 'Data stored successfully', $movie);    
-        }
+        return new MoviesResource(true, 'Data stored successfully', $movie);    
     }
 
     public function update(Request $request, Movie $movie)
@@ -89,7 +85,7 @@ class MoviesController extends Controller
             'torrent' => $request->torrent,
         ]);
 
-        return new MoviesResource(true, 'Data updated successfully', $movie);    
+        return new MoviesResource(true, 'Data updated successfully', null);    
     }
 
     public function show($title)
