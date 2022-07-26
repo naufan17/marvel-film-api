@@ -32,12 +32,17 @@
                         </span>
                     </div>
                     <nav class="sm:mt-10 mt-5 px-6 ">
-                        <a class="flex items-center p-2 sm:my-4 my-2 transition-colors duration-500 text-gray-400 hover:translate-x-1" href="#get_all">
+                        <a class="flex items-center p-2 sm:my-2 my-1 transition-colors duration-500 text-gray-400 hover:translate-x-1" href="#get_all">
                             <span class="sm:mx-4 mx-2 text-base sm:text-lg font-normal">
                                 Get all movies
                             </span>
                         </a>
-                        <a class="flex items-center p-2 sm:my-4 my-2 transition-colors duration-500 text-gray-400 hover:translate-x-1" href="#get_by_id">
+                        <a class="flex items-center p-2 sm:my-2 my-1 transition-colors duration-500 text-gray-400 hover:translate-x-1" href="#get_by_id">
+                            <span class="sm:mx-4 mx-2 text-base sm:text-lg font-normal">
+                                Get movies by id
+                            </span>
+                        </a>
+                        <a class="flex items-center p-2 sm:my-2 my-1 transition-colors duration-500 text-gray-400 hover:translate-x-1" href="#search_by_title">
                             <span class="sm:mx-4 mx-2 text-base sm:text-lg font-normal">
                                 Search movies by title
                             </span>
@@ -89,16 +94,18 @@
                                         <p class="text-gray-300 indent-4">"message": "Data has been obtained",</p>
                                         <p class="text-gray-300 indent-4">"data": [</p>
                                         <p class="text-gray-300 indent-8">{</p>
+                                        <p class="text-gray-300 indent-12">"id": "8",</p>
                                         <p class="text-gray-300 indent-12">"title": "Captain Marvel",</p>
-                                        <p class="text-gray-300 indent-12">"poster": "https://m.media-amazon.com/images/M/MV5BNW...</p>
+                                        <p class="text-gray-300 indent-12">"poster": "https://m.media-amazon.com/images/M/MV5BNW..."</p>
                                         <p class="text-gray-300 indent-12">"year": 2022,</p>
-                                        <p class="text-gray-300 indent-12">"Doctor Strange teams up with a mysterious teenage girl from...</p>
+                                        <p class="text-gray-300 indent-12">"Doctor Strange teams up with a mysterious teenage girl from..."</p>
                                         <p class="text-gray-300 indent-8">}</p>
                                         <p class="text-gray-300 indent-8">{</p>
-                                        <p class="text-gray-300 indent-12">"title": "Moon Knight,</p>
-                                        <p class="text-gray-300 indent-12">"poster": "https://m.media-amazon.com/images/M/MV5BYT...</p>
+                                        <p class="text-gray-300 indent-12">"id": "31",</p>
+                                        <p class="text-gray-300 indent-12">"title": "Moon Knight",</p>
+                                        <p class="text-gray-300 indent-12">"poster": "https://m.media-amazon.com/images/M/MV5BYT..."</p>
                                         <p class="text-gray-300 indent-12">"year": 2022,</p>
-                                        <p class="text-gray-300 indent-12">"plot": "Steven Grant discovers he's been granted the powers...</p>
+                                        <p class="text-gray-300 indent-12">"plot": "Steven Grant discovers he's been granted the powers..."</p>
                                         <p class="text-gray-300 indent-8">}</p>
                                         <p class="text-gray-300 indent-4">]</p>
                                         <p class="text-gray-300">}</p>
@@ -109,20 +116,67 @@
                         <div id="get_by_id">
                             <div class="max-w-3xl mb-10">
                                 <h2 class="max-w-lg mb-6 text-xl font-bold tracking-tight text-gray-300 sm:text-2xl sm:leading-none">
+                                    Get movies by id
+                                </h2>
+                                <p class="text-base text-gray-400 md:text-lg">
+                                    Get detailed data based on title with the following request:
+                                </p>
+                                <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
+                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies/{id}</li>
+                                </ul>
+                                <p class="text-base text-gray-400 sm:text-lg">
+                                    Example:
+                                </p>
+                                <div class="border-b border-gray-400">
+                                    <button type="button" aria-label="Open item" title="Open item" id="show-get-id" class="flex items-center justify-between w-full py-2 focus:outline-none">
+                                    <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies/31</p>
+                                    <!-- Add "transform rotate-180" classes on svg, if is open" -->
+                                    <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
+                                        <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
+                                    </svg>
+                                    </button>
+                                    <div class="p-4 pt-0 hidden bg-gray-700" id="content-get-id">
+                                        <p class="text-gray-300">{</p>
+                                        <p class="text-gray-300 indent-4">"success": true,</p>
+                                        <p class="text-gray-300 indent-4">"message": "Data has been obtained",</p>
+                                        <p class="text-gray-300 indent-4">"data": [</p>
+                                        <p class="text-gray-300 indent-8">{</p>
+                                        <p class="text-gray-300 indent-12">"title": "Moon Knight",</p>
+                                        <p class="text-gray-300 indent-12">"poster": "https://m.media-amazon.com/images/M/MV5BYTc5...",</p>
+                                        <p class="text-gray-300 indent-12">"year": 2022,</p>
+                                        <p class="text-gray-300 indent-12">"trailer": "https://www.youtube.com/embed?v=x7Krla_UxRg",</p>
+                                        <p class="text-gray-300 indent-12">"released": "20 Mar 2022",</p>
+                                        <p class="text-gray-300 indent-12">"runtime": "N/A",</p>
+                                        <p class="text-gray-300 indent-12">"genre": "Action, Adventure,Fantasy",</p>
+                                        <p class="text-gray-300 indent-12">"director": "N/A",</p>
+                                        <p class="text-gray-300 indent-12">"writer": "Doug Moench",</p>
+                                        <p class="text-gray-300 indent-12">"actors": "Oscar Isaac, Ethan Hawke, May Calamawy",</p>
+                                        <p class="text-gray-300 indent-12">"plot": "Steven Grant discovers he's been granted the powers..."</p>
+                                        <p class="text-gray-300 indent-12">"torrent": "magnet:?xt=urn:btih:B067E0D98C5A1F92382A8..."</p>
+                                        <p class="text-gray-300 indent-8">}</p>
+                                        <p class="text-gray-300 indent-4">]</p>
+                                        <p class="text-gray-300">}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="search_by_title">
+                            <div class="max-w-3xl mb-10">
+                                <h2 class="max-w-lg mb-6 text-xl font-bold tracking-tight text-gray-300 sm:text-2xl sm:leading-none">
                                     Search movies by title
                                 </h2>
                                 <p class="text-base text-gray-400 md:text-lg">
                                     Get detailed data based on title with the following request:
                                 </p>
                                 <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
-                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies/{title}</li>
+                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies/search/{title}</li>
                                 </ul>
                                 <p class="text-base text-gray-400 sm:text-lg">
                                     Example:
                                 </p>
                                 <div class="border-b border-gray-400">
                                     <button type="button" aria-label="Open item" title="Open item" id="show-search" class="flex items-center justify-between w-full py-2 focus:outline-none">
-                                    <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies/captain%20marvel</p>
+                                    <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies/search/captain%20marvel</p>
                                     <!-- Add "transform rotate-180" classes on svg, if is open" -->
                                     <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
                                         <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
@@ -144,7 +198,7 @@
                                         <p class="text-gray-300 indent-12">"director": "Anna Boden, Ryan Fleck",</p>
                                         <p class="text-gray-300 indent-12">"writer": "Anna Boden, Ryan Fleck, Geneva Robertson-Dworet",</p>
                                         <p class="text-gray-300 indent-12">"actors": "Brie Larson, Samuel L. Jackson, Ben Mendelsohn",</p>
-                                        <p class="text-gray-300 indent-12">"plot": "Carol Danvers becomes one of the universe's most...</p>
+                                        <p class="text-gray-300 indent-12">"plot": "Carol Danvers becomes one of the universe's most..."</p>
                                         <p class="text-gray-300 indent-12">"torrent": "magnet:?xt=urn:btih:00DE6A0146A8526CB3E..."</p>
                                         <p class="text-gray-300 indent-8">}</p>
                                         <p class="text-gray-300 indent-4">]</p>

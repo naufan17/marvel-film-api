@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\MoviesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::apiResource('/movies', App\Http\Controllers\Api\MoviesController::class);
+// Route::apiResource('/movies', App\Http\Controllers\Api\MoviesController::class);
+
+Route::get('/movies', [MoviesController::class, 'index']);
+Route::get('/movies/{id}', [MoviesController::class, 'show']);
+Route::get('/movies/search/{title}', [MoviesController::class, 'search']);
+Route::post('/movies', [MoviesController::class, 'store']);
+Route::delete('/movies', [MoviesController::class, 'destroy']);

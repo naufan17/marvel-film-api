@@ -13,10 +13,35 @@ class MoviesController extends Controller
 {
     public function index()
     {
-        $movie = Movie::select('title', 'poster', 'year', 'plot')
+        $movie = Movie::select('id', 'title', 'poster', 'year', 'plot')
                         ->orderBy('year', 'desc')
                         ->get();
 
+        if($movie->isEmpty()){
+            return new MoviesResource(false, 'Data failed to get', null);
+        }else{
+            return new MoviesResource(true, 'Data has been obtained', $movie);    
+        }
+    }
+
+    public function show($id)
+    {
+        $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
+                        ->where('id', $id)->get();
+                        
+        if($movie->isEmpty()){
+            return new MoviesResource(false, 'Data failed to get', null);
+        }else{
+            return new MoviesResource(true, 'Data has been obtained', $movie);    
+        }
+    }
+
+    public function search($title)
+    {
+        $title = ucwords($title);
+        $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
+                        ->where('title', 'LIKE', '%'.$title.'%')->get();
+                        
         if($movie->isEmpty()){
             return new MoviesResource(false, 'Data failed to get', null);
         }else{
@@ -86,19 +111,6 @@ class MoviesController extends Controller
         ]);
 
         return new MoviesResource(true, 'Data updated successfully', null);    
-    }
-
-    public function show($title)
-    {
-        $title = ucwords($title);
-        $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
-                        ->where('title', 'LIKE', '%'.$title.'%')->get();
-                        
-        if($movie->isEmpty()){
-            return new MoviesResource(false, 'Data failed to get', null);
-        }else{
-            return new MoviesResource(true, 'Data has been obtained', $movie);    
-        }
     }
 
     public function destroy($id)
