@@ -40,7 +40,9 @@ class MoviesController extends Controller
     {
         $title = ucwords($title);
         $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
-                        ->where('title', 'LIKE', '%'.$title.'%')->get();
+                        ->where('title', 'LIKE', '%'.$title.'%')
+                        ->orderBy('year', 'desc')
+                        ->get();
                         
         if($movie->isEmpty()){
             return new MoviesResource(false, 'Data failed to get', null);
@@ -59,8 +61,7 @@ class MoviesController extends Controller
         ]);
 
         if($validator->fails()) {
-            // return response()->json($validator->errors(), 422);
-            return new MoviesResource(false, 'Data failed to store', null);
+            return response()->json($validator->errors(), 422);
         }
 
         $response = Http::get('http://www.omdbapi.com', [
@@ -86,7 +87,11 @@ class MoviesController extends Controller
             'torrent' => $request->torrent,
         ]);
 
-        return new MoviesResource(true, 'Data stored successfully', $movie);    
+        if($movie){
+            return new MoviesResource(true, 'Data stored successfully', $movie);    
+        }else{
+            return new MoviesResource(false, 'Data failed to store', null);
+        }
     }
 
     public function update(Request $request, Movie $movie)
@@ -99,8 +104,7 @@ class MoviesController extends Controller
         ]);
 
         if($validator->fails()) {
-            // return response()->json($validator->errors(), 422);
-            return new MoviesResource(false, 'Data failed to store', null);
+            return response()->json($validator->errors(), 422);
         }
 
         $movie->update([
@@ -110,13 +114,21 @@ class MoviesController extends Controller
             'torrent' => $request->torrent,
         ]);
 
-        return new MoviesResource(true, 'Data updated successfully', null);    
+        if($movie){
+            return new MoviesResource(true, 'Data updated successfully', $movie);    
+        }else{
+            return new MoviesResource(false, 'Data failed to update', null);
+        }
     }
 
     public function destroy($id)
     {
         $movie = Movie::where('id', $id)->delete();
 
-        return new MoviesResource(true, 'Data deleted successfully', $movie);    
+        if($movie){
+            return new MoviesResource(true, 'Data deleted successfully', $movie);    
+        }else{
+            return new MoviesResource(false, 'Data failed to delete', null);
+        }
     }
 }

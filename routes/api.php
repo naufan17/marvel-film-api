@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MoviesController;
 
 /*
@@ -15,14 +16,20 @@ use App\Http\Controllers\Api\MoviesController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 // Route::apiResource('/movies', App\Http\Controllers\Api\MoviesController::class);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/movies', [MoviesController::class, 'index']);
 Route::get('/movies/{id}', [MoviesController::class, 'show']);
 Route::get('/movies/search/{title}', [MoviesController::class, 'search']);
-Route::post('/movies', [MoviesController::class, 'store']);
-Route::delete('/movies', [MoviesController::class, 'destroy']);
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/profile', function() {
+        return auth()->user();
+    });
+    Route::post('/movies', [MoviesController::class, 'store']);
+    Route::delete('/movies/{id}', [MoviesController::class, 'destroy']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
