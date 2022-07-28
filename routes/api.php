@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function(){
         return auth()->user();
     });
     Route::post('/movies', [MoviesController::class, 'store']);
+    Route::put('/movies/{id}', [MoviesController::class, 'update']);
     Route::delete('/movies/{id}', [MoviesController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

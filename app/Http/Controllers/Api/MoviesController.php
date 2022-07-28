@@ -27,7 +27,8 @@ class MoviesController extends Controller
     public function show($id)
     {
         $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
-                        ->where('id', $id)->get();
+                        ->where('id', $id)
+                        ->get();
                         
         if($movie->isEmpty()){
             return new MoviesResource(false, 'Data failed to get', null);
@@ -94,7 +95,7 @@ class MoviesController extends Controller
         }
     }
 
-    public function update(Request $request, Movie $movie)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
@@ -106,6 +107,8 @@ class MoviesController extends Controller
         if($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        $movie = Movie::findOrFail($id);
 
         $movie->update([
             'title' => $request->title,
@@ -126,7 +129,7 @@ class MoviesController extends Controller
         $movie = Movie::where('id', $id)->delete();
 
         if($movie){
-            return new MoviesResource(true, 'Data deleted successfully', $movie);    
+            return new MoviesResource(true, 'Data deleted successfully', null);    
         }else{
             return new MoviesResource(false, 'Data failed to delete', null);
         }
