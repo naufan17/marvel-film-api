@@ -32,17 +32,17 @@
                     <nav class="sm:mt-10 mt-5 px-6 ">
                         <a class="flex items-center p-2 sm:my-2 my-1 transition-colors duration-500 text-gray-400 hover:translate-x-1" href="#get_all">
                             <span class="sm:mx-4 mx-2 text-base sm:text-lg font-normal">
-                                Get all movies
+                                # Get all movies
                             </span>
                         </a>
                         <a class="flex items-center p-2 sm:my-2 my-1 transition-colors duration-500 text-gray-400 hover:translate-x-1" href="#get_by_id">
                             <span class="sm:mx-4 mx-2 text-base sm:text-lg font-normal">
-                                Get movies by id
+                                # Get movies by id
                             </span>
                         </a>
                         <a class="flex items-center p-2 sm:my-2 my-1 transition-colors duration-500 text-gray-400 hover:translate-x-1" href="#search_by_title">
                             <span class="sm:mx-4 mx-2 text-base sm:text-lg font-normal">
-                                Search movies by title
+                                # Search movies by title
                             </span>
                         </a>
                     </nav>
@@ -51,7 +51,7 @@
                     <div class="sm:p-20 p-10">
                         <div class="max-w-3xl mb-10">
                             <h2 class="max-w-lg mb-6 text-xl font-bold tracking-tight text-gray-300 sm:text-2xl sm:leading-none">
-                            Introduction
+                                Introduction
                             </h2>
                             <p class="text-base text-gray-400 sm:text-lg">
                                 This application programming interface provides a collection of Marvel movies and series data. There are around 30+ data in the form of titles, posters, release years, trailers, release dates, durations, genres, directors, authors, actors, plots and download links via torrent.                            
@@ -67,7 +67,7 @@
                         <div id="get_all">
                             <div class="max-w-3xl mb-10">
                                 <h2 class="max-w-lg mb-6 text-xl font-bold tracking-tight text-gray-300 sm:text-2xl sm:leading-none">
-                                    Get all movies
+                                    # Get all movies
                                 </h2>
                                 <p class="text-base text-gray-400 sm:text-lg">
                                     Get all data with the following request:
@@ -114,7 +114,7 @@
                         <div id="get_by_id">
                             <div class="max-w-3xl mb-10">
                                 <h2 class="max-w-lg mb-6 text-xl font-bold tracking-tight text-gray-300 sm:text-2xl sm:leading-none">
-                                    Get movies by id
+                                    # Get movies by id
                                 </h2>
                                 <p class="text-base text-gray-400 md:text-lg">
                                     Get detailed data based on title with the following request:
@@ -161,7 +161,7 @@
                         <div id="search_by_title">
                             <div class="max-w-3xl mb-10">
                                 <h2 class="max-w-lg mb-6 text-xl font-bold tracking-tight text-gray-300 sm:text-2xl sm:leading-none">
-                                    Search movies by title
+                                    # Get Search movies by title
                                 </h2>
                                 <p class="text-base text-gray-400 md:text-lg">
                                     Get detailed data based on title with the following request:
