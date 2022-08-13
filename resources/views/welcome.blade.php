@@ -88,8 +88,7 @@
                                     </button>
                                     <div class="p-4 pt-0 hidden bg-gray-700" id="content-get-all">
                                         <p class="text-gray-300">{</p>
-                                        <p class="text-gray-300 indent-4">"success": true,</p>
-                                        <p class="text-gray-300 indent-4">"message": "Data has been obtained",</p>
+                                        <p class="text-gray-300 indent-4">"status": "success",</p>
                                         <p class="text-gray-300 indent-4">"data": [</p>
                                         <p class="text-gray-300 indent-8">{</p>
                                         <p class="text-gray-300 indent-12">"id": "8",</p>
@@ -135,8 +134,7 @@
                                     </button>
                                     <div class="p-4 pt-0 hidden bg-gray-700" id="content-get-id">
                                         <p class="text-gray-300">{</p>
-                                        <p class="text-gray-300 indent-4">"success": true,</p>
-                                        <p class="text-gray-300 indent-4">"message": "Data has been obtained",</p>
+                                        <p class="text-gray-300 indent-4">"status": "success",</p>
                                         <p class="text-gray-300 indent-4">"data": [</p>
                                         <p class="text-gray-300 indent-8">{</p>
                                         <p class="text-gray-300 indent-12">"title": "Moon Knight",</p>
@@ -182,8 +180,7 @@
                                     </button>
                                     <div class="p-4 pt-0 hidden bg-gray-700" id="content-search">
                                         <p class="text-gray-300">{</p>
-                                        <p class="text-gray-300 indent-4">"success": true,</p>
-                                        <p class="text-gray-300 indent-4">"message": "Data has been obtained",</p>
+                                        <p class="text-gray-300 indent-4">"status": "success",</p>
                                         <p class="text-gray-300 indent-4">"data": [</p>
                                         <p class="text-gray-300 indent-8">{</p>
                                         <p class="text-gray-300 indent-12">"title": "Captain Marvel",</p>

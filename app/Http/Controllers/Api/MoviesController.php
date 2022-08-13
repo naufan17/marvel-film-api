@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MoviesResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,9 +17,15 @@ class MoviesController extends Controller
                         ->get();
 
         if($movie->isEmpty()){
-            return new MoviesResource(false, 'Data failed to get', null);
+            return response()->json([
+                "status" => "fail",
+                "message" => "data failed to get"
+            ], 404);
         }else{
-            return new MoviesResource(true, 'Data has been obtained', $movie);    
+            return response()->json([
+                "status" => "success",
+                "data" => $movie
+            ], 200);
         }
     }
 
@@ -31,9 +36,15 @@ class MoviesController extends Controller
                         ->get();
                         
         if($movie->isEmpty()){
-            return new MoviesResource(false, 'Data failed to get', null);
+            return response()->json([
+                "status" => "fail",
+                "message" => "data failed to get"
+            ], 404);
         }else{
-            return new MoviesResource(true, 'Data has been obtained', $movie);    
+            return response()->json([
+                "status" => "success",
+                "data" => $movie
+            ], 200);
         }
     }
 
@@ -46,9 +57,15 @@ class MoviesController extends Controller
                         ->get();
                         
         if($movie->isEmpty()){
-            return new MoviesResource(false, 'Data failed to get', null);
+            return response()->json([
+                "status" => "fail",
+                "message" => "data failed to get"
+            ], 404);
         }else{
-            return new MoviesResource(true, 'Data has been obtained', $movie);    
+            return response()->json([
+                "status" => "success",
+                "data" => $movie
+            ], 200);
         }
     }
 
@@ -89,9 +106,16 @@ class MoviesController extends Controller
         ]);
 
         if($movie){
-            return new MoviesResource(true, 'Data stored successfully', $movie);    
+            return response()->json([
+                "status" => "success",
+                "message" => "data stored successfully",
+                "data" => $movie
+            ], 201);
         }else{
-            return new MoviesResource(false, 'Data failed to store', null);
+            return response()->json([
+                "status" => "fail",
+                "message" => "data failed to store"
+            ], 500);
         }
     }
 
@@ -108,9 +132,7 @@ class MoviesController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $movie = Movie::findOrFail($id);
-
-        $movie->update([
+        $movie = Movie::where('id', $id)->update([
             'title' => $request->title,
             'year' => $request->year,
             'trailer' => $request->trailer,
@@ -118,9 +140,15 @@ class MoviesController extends Controller
         ]);
 
         if($movie){
-            return new MoviesResource(true, 'Data updated successfully', $movie);    
+            return response()->json([
+                "status" => "success",
+                "message" => "data updated successfully"
+            ], 200);
         }else{
-            return new MoviesResource(false, 'Data failed to update', null);
+            return response()->json([
+                "status" => "fail",
+                "message" => "data failed to update"
+            ], 404);
         }
     }
 
@@ -129,9 +157,15 @@ class MoviesController extends Controller
         $movie = Movie::where('id', $id)->delete();
 
         if($movie){
-            return new MoviesResource(true, 'Data deleted successfully', null);    
+            return response()->json([
+                "status" => "success",
+                "message" => "data deleted successfully"
+            ], 200);
         }else{
-            return new MoviesResource(false, 'Data failed to delete', null);
+            return response()->json([
+                "status" => "fail",
+                "message" => "data failed to delete"
+            ], 404);
         }
     }
 }
