@@ -81,7 +81,6 @@
                                 <div class="border-b border-gray-400">
                                     <button type="button" aria-label="Open item" title="Open item" id="show-get-all" class="flex items-center justify-between w-full py-2 focus:outline-none">
                                     <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies</p>
-                                    <!-- Add "transform rotate-180" classes on svg, if is open" -->
                                     <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
                                         <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
                                     </svg>
@@ -127,7 +126,6 @@
                                 <div class="border-b border-gray-400">
                                     <button type="button" aria-label="Open item" title="Open item" id="show-get-id" class="flex items-center justify-between w-full py-2 focus:outline-none">
                                     <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies/31</p>
-                                    <!-- Add "transform rotate-180" classes on svg, if is open" -->
                                     <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
                                         <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
                                     </svg>
@@ -165,15 +163,14 @@
                                     Get detailed data based on title with the following request:
                                 </p>
                                 <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
-                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies/search/{title}</li>
+                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies?title={title}</li>
                                 </ul>
                                 <p class="text-base text-gray-400 sm:text-lg">
                                     Example:
                                 </p>
                                 <div class="border-b border-gray-400">
                                     <button type="button" aria-label="Open item" title="Open item" id="show-search" class="flex items-center justify-between w-full py-2 focus:outline-none">
-                                    <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies/search/captain%20marvel</p>
-                                    <!-- Add "transform rotate-180" classes on svg, if is open" -->
+                                    <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies?title=captain%20marvel</p>
                                     <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
                                         <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
                                     </svg>

@@ -10,51 +10,52 @@ use Illuminate\Support\Facades\Http;
 
 class MoviesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movie = Movie::select('id', 'title', 'poster', 'year', 'plot')
+        $title = ucwords($request->query('title'));
+
+        if(empty($title)){
+            $movie = Movie::select('id', 'title', 'poster', 'year', 'plot')
                         ->orderBy('year', 'desc')
                         ->get();
 
-        if($movie->isEmpty()){
-            return response()->json([
-                "status" => "fail",
-                "message" => "data failed to get"
-            ], 404);
-        }else{
-            return response()->json([
-                "status" => "success",
-                "data" => $movie
-            ], 200);
+            if($movie->isEmpty()){
+                return response()->json([
+                    "status" => "fail",
+                    "message" => "data failed to get"
+                ], 404);
+                }else{
+                return response()->json([
+                    "status" => "success",
+                    "data" => $movie
+                ], 200);
+            }
+        } else {
+            $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
+                        ->where('title', 'LIKE', '%'.$title.'%')
+                        ->orderBy('year', 'desc')
+                        ->get();
+
+            if($movie->isEmpty()){
+                return response()->json([
+                    "status" => "fail",
+                    "message" => "data failed to get"
+                ], 404);
+                }else{
+                return response()->json([
+                    "status" => "success",
+                    "data" => $movie
+                ], 200);
+            }
+
         }
     }
 
     public function show($id)
     {
         $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
-                        ->where('id', $id)
-                        ->get();
-                        
-        if($movie->isEmpty()){
-            return response()->json([
-                "status" => "fail",
-                "message" => "data failed to get"
-            ], 404);
-        }else{
-            return response()->json([
-                "status" => "success",
-                "data" => $movie
-            ], 200);
-        }
-    }
-
-    public function search($title)
-    {
-        $title = ucwords($title);
-        $movie = Movie::select('title', 'poster', 'year', 'trailer', 'released', 'runtime', 'genre', 'director', 'writer', 'actors', 'plot', 'torrent')
-                        ->where('title', 'LIKE', '%'.$title.'%')
-                        ->orderBy('year', 'desc')
-                        ->get();
+                    ->where('id', $id)
+                    ->get();
                         
         if($movie->isEmpty()){
             return response()->json([

@@ -23,7 +23,6 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/movies', [MoviesController::class, 'index']);
 Route::get('/movies/{id}', [MoviesController::class, 'show']);
-Route::get('/movies/search/{title}', [MoviesController::class, 'search']);
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/profile', function() {
