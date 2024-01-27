@@ -20,9 +20,9 @@ php artisan serve
 - Body:
   ```json
   {
-    "name": String,
-    "email": String,
-    "password": String
+    "name": Varchar,
+    "email": Varchar,
+    "password": Varchar
   }
   ```
 - Usage:
@@ -58,8 +58,8 @@ php artisan serve
 - Body:
   ```json
   {
-    "email": String,
-    "password": String
+    "email": Varchar,
+    "password": Varchar
   }
   ```
 - Usage:
@@ -182,5 +182,87 @@ php artisan serve
     ```json
     { 
         "message": "Data failed to get" 
+    }
+    ```
+
+### 6. Add Movies
+- Method: `POST`
+- URL Patterns: `/api/movies`
+- Authetication: `true`
+- Body:
+  ```json
+  {
+    "title": Varchar,
+    "year": Varchar,
+    "trailer": Varchar,
+    "torrent": text,
+  }
+  ```
+- Usage:
+  ```
+  curl -X POST \
+  -H "Authorization: Bearer <ACCESS_TOKEN>"
+  -d '{
+    "title": "title",
+    "year": "year", 
+    "trailer": "trailer",
+    "torrent": "torrent"
+  }' \
+  URL_Patterns
+  ```
+- Response:
+  - Success: (200)
+    ```json
+    {
+        "status": "Success",
+        "message": "Data stored successfully",
+        "data": {
+            "title": Varchar,
+            "poster": Varchar,
+            "year": Year,
+            "trailer": Varchar,
+            "released": Varchar,
+            "runtime": Varchar,
+            "genre": Varchar,
+            "director": Varchar,
+            "writer": Varchar,
+            "actors": Varchar,
+            "plot": Varchar,
+            "torrent": Text,
+            "update_at": Date,
+            "created_at": Date,
+            "id": BigInt,
+        },    
+    }
+    ```
+  - Errors: (404)
+    ```json
+    {
+      "message": "Error"
+    }
+    ```
+
+### 7. Delete Movies
+- Method: `DELETE`
+- URL Patterns: `/api/movies/{Id}`
+- Authetication: `true`
+- Usage:
+  ```
+  curl -X POST \
+  -H "Authorization: Bearer <ACCESS_TOKEN>" \
+  URL_Patterns
+  ```
+- Response:
+  - Success: (200)
+    ```json
+    {
+        "status": "Success",
+        "message": "Data deleted successfully",
+    }
+    ```
+  - Errors: (404)
+    ```json
+    {
+      "message": "Error"
     }
     ```
