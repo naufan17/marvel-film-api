@@ -87,7 +87,7 @@ php artisan serve
     }
     ```
 
-### 2. Get All Movies
+### 3. Get All Movies
 - Method: `GET`
 - URL Patterns: `/api/movies`
 - Authentication: `false`
@@ -117,38 +117,6 @@ php artisan serve
         "message": "Data failed to get" 
     }
     ```
-
-### 3. Get Movies by Title
-- Method: `GET`
-- URL Patterns: `/api/movies`
-- Authentication: `false`
-- Usage:
-  ```
-  curl -X GET
-  URL_Patterns
-  ```
-- Response:
-  - Success: (200)
-    ```json
-    {
-    "status": "Success",
-    "data": [
-        {
-            "id": BigInt,
-            "title": Varchar,
-            "poster": Varchar,
-            "year": Year,
-            "plot": Varchar
-        },
-    }
-    ```
-  - Errors: (404)
-    ```json
-    { 
-        "message": "Data failed to get" 
-    }
-    ```
-
 ### 4. Get Movies by Title
 - Method: `GET`
 - URL Patterns: `/api/movies?title={title}`

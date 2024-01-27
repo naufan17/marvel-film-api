@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 class MoviesController extends Controller
 {
@@ -23,10 +24,10 @@ class MoviesController extends Controller
         $movies = $moviesQuery->get();
         
         if ($movies->isEmpty()) {
-            return response()->json(["status" => "fail", "message" => "data failed to get"], 404);
+            return response()->json(["status" => "Fail", "message" => "Data failed to get"], 404);
         }
         
-        return response()->json(["status" => "success", "data" => $movies], 200);
+        return response()->json(["status" => "Success", "data" => $movies], 200);
         
     }
 
@@ -36,74 +37,81 @@ class MoviesController extends Controller
                     ->find($id);
                         
         if (!$movie) {
-            return response()->json(["status" => "fail", "message" => "data failed to get"], 404);
+            return response()->json(["status" => "Fail", "message" => "Data failed to get"], 404);
         }
         
-        return response()->json(["status" => "success", "data" => $movie], 200);
+        return response()->json(["status" => "Success", "data" => $movie], 200);
     }
 
     public function store(Request $request)
     {
-        $validator = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'year' => 'required|string',
             'trailer' => 'required|string',
             'torrent' => 'required|string',
         ]);
 
+        if($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $response = Http::get('http://www.omdbapi.com', [
             'apikey' => '7fd0d56',
-            't' => $validator['title'],
-            'y' => $validator['year'],
+            't' => $request->title,
+            'y' => $request->year,
         ]);
 
         $data = json_decode($response);
 
-        if (isset($data['Title'])) {
-            $movie = Movie::create([
-                'title' => $data['Title'],
-                'poster' => $data['Poster'],
-                'year' => $validator['year'],
-                'trailer' => $validator['trailer'],
-                'released' => $data['Released'],
-                'runtime' => $data['Runtime'],
-                'genre' => $data['Genre'],
-                'director' => $data['Director'],
-                'writer' => $data['Writer'],
-                'actors' => $data['Actors'],
-                'plot' => $data['Plot'],
-                'torrent' => $validator['torrent'],
-            ]);
-        
-            if ($movie) {
-                return response()->json(["status" => "success", "message" => "data stored successfully", "data" => $movie], 201);
-            }
-        }        
+        $movie = Movie::create([
+            'title' => $data->Title,
+            'poster' => $data->Poster,
+            'year' => $request->year,
+            'trailer' => $request->trailer,
+            'released' => $data->Released,
+            'runtime' => $data->Runtime,
+            'genre' => $data->Genre,
+            'director' => $data->Director,
+            'writer' => $data->Writer,
+            'actors' => $data->Actors,
+            'plot' => $data->Plot,
+            'torrent' => $request->torrent,
+        ]);
 
-        return response()->json(["status" => "fail", "message" => "data failed to store"], 500);
+    
+        if ($movie) {
+            return response()->json(["status" => "Success", "message" => "Data stored successfully", "data" => $movie], 201);
+        }
+
+        return response()->json(["status" => "Fail", "message" => "Data failed to store"], 500);
     }
 
     public function update(Request $request, $id)
     {
-        $validator = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'year' => 'required|string',
             'trailer' => 'required|string',
             'torrent' => 'required|string',
         ]);
 
+        if($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $movie = Movie::where('id', $id)->update([
-            'title' => $validator['title'],
-            'year' => $validator['year'],
-            'trailer' => $validator['trailer'],
-            'torrent' => $validator['torrent'],
+            'title' => $request->title,
+            'year' => $request->year,
+            'trailer' => $request->trailer,
+            'torrent' => $request->torrent,
         ]);
 
         if ($movie) {
-            return response()->json(["status" => "success", "message" => "data updated successfully"], 200);
+            return response()->json(["status" => "Success", "message" => "Data updated successfully"], 200);
         }
 
-        return response()->json(["status" => "fail", "message" => "data failed to update"], 404);
+        return response()->json(["status" => "Fail", "message" => "Data failed to update"], 404);
     }
 
     public function destroy($id)
@@ -111,9 +119,9 @@ class MoviesController extends Controller
         $deleted = Movie::destroy($id);
 
         if ($deleted) {
-            return response()->json([ "status" => "success", "message" => "data deleted successfully"], 200);
+            return response()->json([ "status" => "Success", "message" => "Data deleted successfully"], 200);
         }
 
-        return response()->json(["status" => "fail", "message" => "data failed to delete"], 404);
+        return response()->json(["status" => "Fail", "message" => "Data failed to delete"], 404);
     }
 }
