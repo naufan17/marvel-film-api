@@ -150,7 +150,7 @@ php artisan serve
     
 ### 5. Get Movies by Id
 - Method: `GET`
-- URL Patterns: `/api/movies/{Id}`
+- URL Patterns: `/api/movies/{id}`
 - Authentication: `false`
 - Usage:
   ```
@@ -244,7 +244,7 @@ php artisan serve
 
 ### 7. Delete Movies
 - Method: `DELETE`
-- URL Patterns: `/api/movies/{Id}`
+- URL Patterns: `/api/movies/{id}`
 - Authetication: `true`
 - Usage:
   ```
