@@ -87,10 +87,11 @@ php artisan serve
     }
     ```
 
-### 3. Get All Movies
+### 3. Get Movies
 - Method: `GET`
-- URL Patterns: `/api/movies`
+- URL Patterns: `/api/movies?title={title}&page={page}&limit={limit}`
 - Authentication: `false`
+- Params: `title or page or limit`
 - Usage:
   ```
   curl -X GET
@@ -103,12 +104,17 @@ php artisan serve
     "status": "Success",
     "data": [
         {
-            "id": BigInt,
-            "title": Varchar,
-            "poster": Varchar,
-            "year": Year,
-            "plot": Varchar
-        },
+            "current_page": 1,
+            "data": [
+                {
+                    "id": BigInt,
+                    "title": Varchar,
+                    "poster": Varchar,
+                    "year": Year,
+                    "plot": Varchar
+                },            
+            ]
+        }
     }
     ```
   - Errors: (404)
@@ -117,38 +123,8 @@ php artisan serve
         "message": "Data failed to get" 
     }
     ```
-### 4. Get Movies by Title
-- Method: `GET`
-- URL Patterns: `/api/movies?title={title}`
-- Authentication: `false`
-- Params: `title`
-- Usage:
-  ```
-  curl -X GET
-  URL_Patterns
-  ```
-- Response:
-  - Success: (200)
-    ```json
-    {
-        "status": "Success",
-        "data": {
-            "id": BigInt,
-            "title": Varchar,
-            "poster": Varchar,
-            "year": Year,
-            "plot": Varchar
-        },
-    }
-    ```
-  - Errors: (404)
-    ```json
-    { 
-        "message": "Data failed to get" 
-    }
-    ```
-    
-### 5. Get Movies by Id
+
+### 4. Get Movies by Id
 - Method: `GET`
 - URL Patterns: `/api/movies/{id}`
 - Authentication: `false`
@@ -185,7 +161,7 @@ php artisan serve
     }
     ```
 
-### 6. Add Movies
+### 5. Add Movies
 - Method: `POST`
 - URL Patterns: `/api/movies`
 - Authetication: `true`
@@ -242,7 +218,7 @@ php artisan serve
     }
     ```
 
-### 7. Delete Movies
+### 6. Delete Movies
 - Method: `DELETE`
 - URL Patterns: `/api/movies/{id}`
 - Authetication: `true`

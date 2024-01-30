@@ -13,6 +13,8 @@ class MoviesController extends Controller
     public function index(Request $request)
     {
         $title = ucwords($request->query('title'));
+        $page = $request->query('page', 1);
+        $limit = $request->query('limit', 12);
 
         $moviesQuery = Movie::select('id', 'title', 'poster', 'year', 'plot')
                             ->orderBy('year', 'desc');
@@ -21,14 +23,13 @@ class MoviesController extends Controller
             $moviesQuery->where('title', 'LIKE', '%' . $title . '%');
         }
         
-        $movies = $moviesQuery->get();
+        $movies = $moviesQuery->paginate($limit, ['*'], 'page', $page);
         
         if ($movies->isEmpty()) {
             return response()->json(["status" => "Fail", "message" => "Data failed to get"], 404);
         }
         
         return response()->json(["status" => "Success", "data" => $movies], 200);
-        
     }
 
     public function show($id)
