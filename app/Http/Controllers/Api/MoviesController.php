@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
+
 class MoviesController extends Controller
 {
     public function index(Request $request)
-    {
+    {        
         $title = ucwords($request->query('title'));
         $page = $request->query('page', 1);
         $limit = $request->query('limit', 12);
@@ -46,6 +47,9 @@ class MoviesController extends Controller
 
     public function store(Request $request)
     {
+        $URL_OMDB = env('URL_OMDB', 'http://www.omdbapi.com');
+        $API_KEY_OMDB = env('API_KEY_OMDB', '7fd0d56');
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'year' => 'required|string',
@@ -56,9 +60,9 @@ class MoviesController extends Controller
         if($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
-        $response = Http::get('http://www.omdbapi.com', [
-            'apikey' => '7fd0d56',
+        
+        $response = Http::get($URL_OMDB, [
+            'apikey' => $API_KEY_OMDB,
             't' => $request->title,
             'y' => $request->year,
         ]);
