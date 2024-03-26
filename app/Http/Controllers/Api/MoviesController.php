@@ -27,10 +27,16 @@ class MoviesController extends Controller
         $movies = $moviesQuery->paginate($limit, ['*'], 'page', $page);
         
         if ($movies->isEmpty()) {
-            return response()->json(["status" => "Fail", "message" => "Data failed to get"], 404);
+            return response()->json([
+                "status" => "Fail", 
+                "message" => "Data failed to get"
+            ], 404);
         }
         
-        return response()->json(["status" => "Success", "data" => $movies], 200);
+        return response()->json([
+            "status" => "Success", 
+            "data" => $movies
+        ], 200);
     }
 
     public function show($id)
@@ -39,10 +45,16 @@ class MoviesController extends Controller
                     ->find($id);
                         
         if (!$movie) {
-            return response()->json(["status" => "Fail", "message" => "Data failed to get"], 404);
+            return response()->json([
+                "status" => "Fail", 
+                "message" => "Data failed to get"
+            ], 404);
         }
         
-        return response()->json(["status" => "Success", "data" => $movie], 200);
+        return response()->json([
+            "status" => "Success", 
+            "data" => $movie
+        ], 200);
     }
 
     public function store(Request $request)
@@ -84,12 +96,18 @@ class MoviesController extends Controller
             'torrent' => $request->torrent,
         ]);
 
-    
         if ($movie) {
-            return response()->json(["status" => "Success", "message" => "Data stored successfully", "data" => $movie], 201);
+            return response()->json([
+                "status" => "Success", 
+                "message" => "Data stored successfully", 
+                "data" => $movie
+            ], 201);
         }
 
-        return response()->json(["status" => "Fail", "message" => "Data failed to store"], 500);
+        return response()->json([
+            "status" => "Fail", 
+            "message" => "Data failed to store"
+        ], 500);
     }
 
     public function update(Request $request, $id)
@@ -113,10 +131,16 @@ class MoviesController extends Controller
         ]);
 
         if ($movie) {
-            return response()->json(["status" => "Success", "message" => "Data updated successfully"], 200);
+            return response()->json([
+                "status" => "Success", 
+                "message" => "Data updated successfully"
+            ], 200);
         }
 
-        return response()->json(["status" => "Fail", "message" => "Data failed to update"], 404);
+        return response()->json([
+            "status" => "Fail", 
+            "message" => "Data failed to update"
+        ], 404);
     }
 
     public function destroy($id)
@@ -124,9 +148,15 @@ class MoviesController extends Controller
         $deleted = Movie::destroy($id);
 
         if ($deleted) {
-            return response()->json([ "status" => "Success", "message" => "Data deleted successfully"], 200);
+            return response()->json([
+                "status" => "Success", 
+                "message" => "Data deleted successfully"
+            ], 200);
         }
 
-        return response()->json(["status" => "Fail", "message" => "Data failed to delete"], 404);
+        return response()->json([
+            "status" => "Fail", 
+            "message" => "Data failed to delete"
+        ], 404);
     }
 }

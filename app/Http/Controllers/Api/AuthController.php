@@ -31,20 +31,32 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['message' => 'Register successful', 'access_token' => $token, 'token_type' => 'Bearer'], 201);
+        return response()->json([
+            'message' => 'Register successful', 
+            'user' => auth()->user(), 
+            'access_token' => $token, 
+            'token_type' => 'Bearer'
+        ], 201);
     }
     
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))){
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
         }
                 
         $user = User::where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['message' => 'Login successful', 'access_token' => $token, 'token_type' => 'Bearer'], 200);
+        return response()->json([
+            'message' => 'Login successful', 
+            'user' => auth()->user(), 
+            'access_token' => $token, 
+            'token_type' => 'Bearer'
+        ], 200);
     }
     
     public function logout(Request $request)
@@ -53,6 +65,8 @@ class AuthController extends Controller
         
         $user->tokens()->delete();
 
-        return response()->json(['message' => 'Logout successfully and token was deleted']);
+        return response()->json([
+            'message' => 'Logout successfully and token was deleted'
+        ]);
     }
 }
