@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -20,7 +20,11 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors(), 422);       
+            return response()->json([
+                'status' => 'Unprocessable content', 
+                'message' => 'Invalid data request body',
+                'error' => $validator->errors()
+            ], 422);       
         };
 
         $user = User::create([
@@ -32,18 +36,34 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
+            'status' => 'Created', 
             'message' => 'Register successful', 
-            'user' => auth()->user(), 
-            'access_token' => $token, 
-            'token_type' => 'Bearer'
+            'data' => [
+                'access_token' => $token, 
+                'token_type' => 'Bearer'    
+            ]
         ], 201);
     }
     
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
             return response()->json([
-                'message' => 'Unauthorized'
+                'status' => 'Unprocessable content', 
+                'message' => 'Invalid data request body',
+                'error' => $validator->errors()
+            ], 422);       
+        }
+
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'status' => 'Unauthorized',
+                'message' => 'Invalid email and password'
             ], 401);
         }
                 
@@ -52,20 +72,21 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'message' => 'Login successful', 
-            'user' => auth()->user(), 
-            'access_token' => $token, 
-            'token_type' => 'Bearer'
+            'status' => 'OK', 
+            'message' => 'Login successful',
+            'data' => [
+                'access_token' => $token, 
+                'token_type' => 'Bearer'    
+            ]
         ], 200);
     }
     
     public function logout(Request $request)
     {
-        $user = $request->user();
-        
-        $user->tokens()->delete();
+        $request->user()->tokens()->delete();
 
         return response()->json([
+            'status' => 'OK', 
             'message' => 'Logout successfully and token was deleted'
         ]);
     }

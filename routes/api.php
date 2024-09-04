@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MoviesController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Middleware\EnsureTokenIsValid;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +17,14 @@ use App\Http\Controllers\Api\MoviesController;
 |
 */
 
-// Route::apiResource('/movies', App\Http\Controllers\Api\MoviesController::class);
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/movies', [MoviesController::class, 'index']);
 Route::get('/movies/{id}', [MoviesController::class, 'show']);
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/profile', function() {
-        return auth()->user();
-    });
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/movies', [MoviesController::class, 'store']);
     Route::put('/movies/{id}', [MoviesController::class, 'update']);
     Route::delete('/movies/{id}', [MoviesController::class, 'destroy']);
