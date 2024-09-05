@@ -42,25 +42,6 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Handle unauthenticated requests.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
-     */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if ($request->expectsJson()) {
-            return response()->json([
-                'status' => 'Unauthenticated',
-                'message' => 'Unauthenticated. Please provide a valid Bearer token'
-            ], 401);
-        }
-
-        return redirect()->guest('login');
-    }
-
-    /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -74,6 +55,11 @@ class Handler extends ExceptionHandler
                 'status' => 'Not found',
                 'message' => 'Route not found.',
             ], 404);
+        } else if ($exception instanceof AuthenticationException) {
+            return response()->json([
+                'status' => 'Unauthenticated',
+                'message' => 'Please provide a valid Bearer token'
+            ], 401);
         }
 
         return parent::render($request, $exception);

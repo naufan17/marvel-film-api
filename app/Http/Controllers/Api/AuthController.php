@@ -88,6 +88,6 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'OK', 
             'message' => 'Logout successfully and token was deleted'
-        ]);
+        ], 200);
     }
 }
