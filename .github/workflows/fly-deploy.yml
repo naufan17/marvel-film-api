@@ -17,8 +17,8 @@ jobs:
   
     - uses: superfly/flyctl-actions/setup-flyctl@master
 
-    - name: Install dependencies
-      run: composer install
+    # - name: Install dependencies
+    #   run: composer install
 
     - name: Deploy to Fly.io
       run: 
