@@ -52,12 +52,12 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof NotFoundHttpException) {
             return response()->json([
-                'status' => 'Not found',
+                'status' => false,
                 'message' => 'Route not found.',
             ], 404);
         } else if ($exception instanceof AuthenticationException) {
             return response()->json([
-                'status' => 'Unauthenticated',
+                'status' => false,
                 'message' => 'Please provide a valid Bearer token'
             ], 401);
         }

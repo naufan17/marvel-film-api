@@ -12,7 +12,7 @@ class ProfileController extends Controller
         $user = $request->user();
 
         return response()->json([
-            'status' => 'OK',
+            'status' => true,
             'message' => 'User profile retrieved successfully',
             'data' => $user
         ], 200);

@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         if($validator->fails()){
             return response()->json([
-                'status' => 'Unprocessable content', 
+                'status' => false, 
                 'message' => 'Invalid data request body',
                 'error' => $validator->errors()
             ], 422);       
@@ -36,7 +36,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'status' => 'Created', 
+            'status' => true, 
             'message' => 'Register successful', 
             'data' => [
                 'access_token' => $token, 
@@ -54,7 +54,7 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'Unprocessable content', 
+                'status' => false, 
                 'message' => 'Invalid data request body',
                 'error' => $validator->errors()
             ], 422);       
@@ -62,7 +62,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
-                'status' => 'Unauthorized',
+                'status' => false,
                 'message' => 'Invalid email and password'
             ], 401);
         }
@@ -72,7 +72,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'status' => 'OK', 
+            'status' => true, 
             'message' => 'Login successful',
             'data' => [
                 'access_token' => $token, 
@@ -86,7 +86,7 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
 
         return response()->json([
-            'status' => 'OK', 
+            'status' => true, 
             'message' => 'Logout successfully and token was deleted'
         ], 200);
     }

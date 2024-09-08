@@ -26,13 +26,13 @@ class MoviesController extends Controller
         
         if ($movies->isEmpty()) {
             return response()->json([
-                "status" => "Not Found", 
+                "status" => false, 
                 "message" => "No movies found matching your criteria"
             ], 404);
         }
         
         return response()->json([
-            "status" => "OK", 
+            "status" => true, 
             "message" => "Movies retrived successfully",
             "data" => $movies
         ], 200);
@@ -45,13 +45,13 @@ class MoviesController extends Controller
                         
         if (!$movie) {
             return response()->json([
-                "status" => "Not Found", 
+                "status" => false, 
                 "message" => "Data failed to retrived"
             ], 404);
         }
         
         return response()->json([
-            "status" => "OK", 
+            "status" => true, 
             "message" => "Data retrived successfully",
             "data" => $movie
         ], 200);
@@ -71,7 +71,7 @@ class MoviesController extends Controller
 
         if($validator->fails()) {
             return response()->json([
-                'status' => 'Unprocessable content', 
+                'status' => false, 
                 'message' => 'Invalid data request body',
                 'error' => $validator->errors()
             ], 422);       
@@ -102,13 +102,13 @@ class MoviesController extends Controller
 
         if (!$movie) {
             return response()->json([
-                "status" => "Error", 
+                "status" => false, 
                 "message" => "Movie failed to store"
             ], 500);
         }
 
         return response()->json([
-            "status" => "Created", 
+            "status" => true, 
             "message" => "Movie stored successfully", 
             "data" => $movie
         ], 201);
@@ -125,7 +125,7 @@ class MoviesController extends Controller
 
         if($validator->fails()) {
             return response()->json([
-                'status' => 'Unprocessable content', 
+                'status' => false, 
                 'message' => 'Invalid data request body',
                 'error' => $validator->errors()
             ], 422);       
@@ -140,13 +140,13 @@ class MoviesController extends Controller
 
         if (!$movie) {
             return response()->json([
-                "status" => "Error", 
+                "status" => false, 
                 "message" => "Movie failed to update"
             ], 500);
         }
 
         return response()->json([
-            "status" => "OK", 
+            "status" => true, 
             "message" => "Movie updated successfully"
         ], 200);
     }
@@ -157,13 +157,13 @@ class MoviesController extends Controller
 
         if (!$deleted) {
             return response()->json([
-                "status" => "Not Found", 
+                "status" => false, 
                 "message" => "Movie not found"
             ], 404);
         }
 
         return response()->json([
-            "status" => "OK", 
+            "status" => true, 
             "message" => "Movie deleted successfully"
         ], 200);
     } 
