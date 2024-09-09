@@ -7,18 +7,12 @@
 
         <title>Documentation Marvel API</title>
         
-        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/jquery.js') }}"></script>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <style>
-            body{
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
     </head>
     <body class="antialiased ">
         <div class="relative bg-gray-800">
@@ -60,7 +54,7 @@
                                 These are open data for public. It doesn't need an API key to call these methods. You can call simple GET request or open it directly from the browser.
                             </p><br>
                             <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
-                                <li>The base endpoint is: https://marvel-film-api.herokuapp.com/</li>
+                                <li>The base endpoint is: https://marvel-film-api.fly.dev/</li>
                                 <li>All endpoints return either a JSON object or array.</li>
                             </ul>
                         </div>
@@ -73,21 +67,22 @@
                                     Get all data with the following request:
                                 </p>
                                 <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
-                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies</li>
+                                    <li>Request: https://marvel-film-api.fly.dev/api/movies</li>
                                 </ul>
                                 <p class="text-base text-gray-400 sm:text-lg">
                                     Example:
                                 </p>
                                 <div class="border-b border-gray-400">
                                     <button type="button" aria-label="Open item" title="Open item" id="show-get-all" class="flex items-center justify-between w-full py-2 focus:outline-none">
-                                    <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies</p>
-                                    <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
-                                        <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
-                                    </svg>
+                                        <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.fly.dev/api/movies</p>
+                                        <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
+                                            <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
+                                        </svg>
                                     </button>
                                     <div class="p-4 pt-0 hidden bg-gray-700" id="content-get-all">
                                         <p class="text-gray-300">{</p>
-                                        <p class="text-gray-300 indent-4">"status": "success",</p>
+                                        <p class="text-gray-300 indent-4">"status": true,</p>
+                                        <p class="text-gray-300 indent-4">"message": "Movies retrived successfully",</p>
                                         <p class="text-gray-300 indent-4">"data": [</p>
                                         <p class="text-gray-300 indent-8">{</p>
                                         <p class="text-gray-300 indent-12">"id": "8",</p>
@@ -118,23 +113,23 @@
                                     Get detailed data based on title with the following request:
                                 </p>
                                 <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
-                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies/{id}</li>
+                                    <li>Request: https://marvel-film-api.fly.dev/api/movies/{id}</li>
                                 </ul>
                                 <p class="text-base text-gray-400 sm:text-lg">
                                     Example:
                                 </p>
                                 <div class="border-b border-gray-400">
                                     <button type="button" aria-label="Open item" title="Open item" id="show-get-id" class="flex items-center justify-between w-full py-2 focus:outline-none">
-                                    <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.herokuapp.com/api/movies/31</p>
-                                    <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
-                                        <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
-                                    </svg>
+                                        <p class="text-base text-gray-400 sm:text-lg">https://marvel-film-api.fly.dev/api/movies/31</p>
+                                        <svg viewBox="0 0 24 24" class="w-3 text-gray-400 transition-transform duration-200">
+                                            <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" points="2,7 12,17 22,7" stroke-linejoin="round"></polyline>
+                                        </svg>
                                     </button>
                                     <div class="p-4 pt-0 hidden bg-gray-700" id="content-get-id">
                                         <p class="text-gray-300">{</p>
-                                        <p class="text-gray-300 indent-4">"status": "success",</p>
-                                        <p class="text-gray-300 indent-4">"data": [</p>
-                                        <p class="text-gray-300 indent-8">{</p>
+                                        <p class="text-gray-300 indent-4">"status": true,</p>
+                                        <p class="text-gray-300 indent-4">"message": "Movies retrived successfully",</p>
+                                        <p class="text-gray-300 indent-4">"data": {</p>
                                         <p class="text-gray-300 indent-12">"title": "Moon Knight",</p>
                                         <p class="text-gray-300 indent-12">"poster": "https://m.media-amazon.com/images/M/MV5BYTc5...",</p>
                                         <p class="text-gray-300 indent-12">"year": 2022,</p>
@@ -147,8 +142,7 @@
                                         <p class="text-gray-300 indent-12">"actors": "Oscar Isaac, Ethan Hawke, May Calamawy",</p>
                                         <p class="text-gray-300 indent-12">"plot": "Steven Grant discovers he's been granted the powers..."</p>
                                         <p class="text-gray-300 indent-12">"torrent": "magnet:?xt=urn:btih:B067E0D98C5A1F92382A8..."</p>
-                                        <p class="text-gray-300 indent-8">}</p>
-                                        <p class="text-gray-300 indent-4">]</p>
+                                        <p class="text-gray-300 indent-4">}</p>
                                         <p class="text-gray-300">}</p>
                                     </div>
                                 </div>
@@ -163,7 +157,7 @@
                                     Get detailed data based on title with the following request:
                                 </p>
                                 <ul class="text-base text-gray-400 ml-5 sm:text-lg list-disc">
-                                    <li>Request: https://marvel-film-api.herokuapp.com/api/movies?title={title}</li>
+                                    <li>Request: https://marvel-film-api.fly.dev/api/movies?title={title}</li>
                                 </ul>
                                 <p class="text-base text-gray-400 sm:text-lg">
                                     Example:
@@ -177,9 +171,9 @@
                                     </button>
                                     <div class="p-4 pt-0 hidden bg-gray-700" id="content-search">
                                         <p class="text-gray-300">{</p>
-                                        <p class="text-gray-300 indent-4">"status": "success",</p>
-                                        <p class="text-gray-300 indent-4">"data": [</p>
-                                        <p class="text-gray-300 indent-8">{</p>
+                                        <p class="text-gray-300 indent-4">"status": true,</p>
+                                        <p class="text-gray-300 indent-4">"message": "Movies retrived successfully",</p>
+                                        <p class="text-gray-300 indent-4">"data": {</p>
                                         <p class="text-gray-300 indent-12">"title": "Captain Marvel",</p>
                                         <p class="text-gray-300 indent-12">"poster": "https://m.media-amazon.com/images/M/MV5BMT...",</p>
                                         <p class="text-gray-300 indent-12">"year": 2019,</p>
@@ -192,8 +186,7 @@
                                         <p class="text-gray-300 indent-12">"actors": "Brie Larson, Samuel L. Jackson, Ben Mendelsohn",</p>
                                         <p class="text-gray-300 indent-12">"plot": "Carol Danvers becomes one of the universe's most..."</p>
                                         <p class="text-gray-300 indent-12">"torrent": "magnet:?xt=urn:btih:00DE6A0146A8526CB3E..."</p>
-                                        <p class="text-gray-300 indent-8">}</p>
-                                        <p class="text-gray-300 indent-4">]</p>
+                                        <p class="text-gray-300 indent-4">}</p>
                                         <p class="text-gray-300">}</p>
                                     </div>
                                 </div>
